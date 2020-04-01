@@ -8,6 +8,6 @@ Click on soilders to kill them, use your mouse to place archer towers by moving 
 
 # How To Win
 
-This is ann infinite game where you try to stay alive as long as you can, so in other words there is no winning.
+This is an infinite game where you try to stay alive as long as you can, so in other words there is no winning.
 
 Feliciter! 
