@@ -46,7 +46,8 @@ class archerTower(object):
   def __init__ (mouseX,mouseY):
       
 #img(archerTower, archerTowerX,archerTowerY)
-  
+scoreVar = millis * 100
+text(scoreVar, width - (width * .9), height - (height * 0.9))
 tower1 = archerTower(0)
   
 def delayTimer():
