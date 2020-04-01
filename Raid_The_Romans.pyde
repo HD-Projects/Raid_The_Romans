@@ -55,3 +55,19 @@ def delayTimer():
     if ((dist(archerTowerX,archerTowerY,soilderX,soilderY) > displayHeight/ 10) and (reload == 1)):
         line(archerTowerX,archerTowerY, soilderX,soilderY)
     
+<<<<<<< HEAD
+=======
+    if reload == 0:
+    delayTimer(
+         
+         
+if (dist(mouseX,mouseY,settingsX,settingsY) < height/10):
+    text("Low Quality Mode, remcomenned for laptops",settingsX + height/5, settingsY + height/5)
+    if (dist(settingsX + height/5, settingsY + height/5,mouseX,mouseY) < height /10):
+        frameRate = (frameRate * .7)
+    text("Reset Game", settingsX + height/5, settingsY + height/4)
+    if (dist(settingsX + height/5, settingsY + height/4,mouseX,mouseY) < height /10):
+      exit()        
+    
+    
+>>>>>>> eb35ae091471fe544f70d269675b32ecdb4e7d98
