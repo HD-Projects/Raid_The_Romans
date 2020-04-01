@@ -15,10 +15,14 @@ def setup():
      archerTowerY = 0
      
 def draw():
-     background(255)
-     img = loadImage("castle.png")
-     image(img, displayWidth*0.75, displayHeight*0.3, displayHeight*0.25, displayHeight*0.25)
-     line(displayWidth*0.7, 0, displayWidth*0.7, displayHeight)
+    global soldierX, soldierY, soldierAlive, gameMode
+    background(255)
+    for i in range(len(soldierY)):
+        img = loadImage("soldier.png")
+        image(img, soldierX[i-1], soldierX[i-1], displayWidth*0.1, displayHeight*0.2)
+    img = loadImage("castle.png")
+    image(img, displayWidth*0.75, displayHeight*0.3, displayHeight*0.25, displayHeight*0.25)
+    line(displayWidth*0.7, 0, displayWidth*0.7, displayHeight)
      
      
 def mouseClicked():
@@ -43,12 +47,12 @@ class archerTower(object):
 tower1 = archerTower(0)
   
 def delayTimer():
-  m = millis
-  if millis == (m + 100):
-    reload = 1
+    m = millis
+    if millis == (m + 100):
+        reload = 1
         
-if ((dist(archerTowerX,archerTowerY,soilderX,soilderY) > height/ 10) && (reload == 1)):
-   line(archerTowerX,archerTowerY, soilderX,soilderY)
- 
-if reload == 0:
-  delayTimer(
+    if ((dist(archerTowerX,archerTowerY,soilderX,soilderY) > height/ 10) && (reload == 1)):
+    line(archerTowerX,archerTowerY, soilderX,soilderY)
+    
+    if reload == 0:
+    delayTimer(
