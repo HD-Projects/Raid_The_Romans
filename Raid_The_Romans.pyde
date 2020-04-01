@@ -6,6 +6,7 @@ soldierY = [1]
 gameMode = 0
 archerX = []
 archerY = []
+hp = 50
 
 def setup():
      fullScreen()
@@ -34,6 +35,10 @@ def draw():
     img = loadImage("castle.png")
     image(img, displayWidth*0.85, displayHeight*0.3, displayHeight*0.25, displayHeight*0.25)
     line(displayWidth*0.82, 0, displayWidth*0.82, displayHeight)
+    fill(10)
+    rect(displayWidth*0.865, displayHeight*0.2, displayWidth/10 ,displayHeight/30)
+    fill(255) 
+    rect(displayWidth*0.867, displayHeight*0.2+2, displayWidth/10.5+(displayWidth/10/1000)*hp,displayHeight/35) 
     
      
      
@@ -54,24 +59,21 @@ def delayTimer():
         
     if ((dist(archerTowerX,archerTowerY,soilderX,soilderY) > displayHeight/ 10) and (reload == 1)):
         line(archerTowerX,archerTowerY, soilderX,soilderY)
-
-    if reload == 0:
-    delayTimer(
          
          
-if (dist(mouseX,mouseY,settingsX,settingsY) < height/10):
-    text("Low Quality Mode, remcomenned for laptops",settingsX + height/5, settingsY + height/5)
-    if (dist(settingsX + height/5, settingsY + height/5,mouseX,mouseY) < height /10):
-        frameRate = (frameRate * .7)
-    text("Reset Game", settingsX + height/5, settingsY + height/4)
-    if (dist(settingsX + height/5, settingsY + height/4,mouseX,mouseY) < height /10):
-      exit()        
+    if (dist(mouseX,mouseY,settingsX,settingsY) < height/10):
+        text("Low Quality Mode, remcomenned for laptops",settingsX + height/5, settingsY + height/5)
+        if (dist(settingsX + height/5, settingsY + height/5,mouseX,mouseY) < height /10):
+            frameRate = (frameRate * .7)
+        text("Reset Game", settingsX + height/5, settingsY + height/4)
+        if (dist(settingsX + height/5, settingsY + height/4,mouseX,mouseY) < height /10):
+            exit()        
 
 
-if (dist(mouseX,mouseY,settingsX,settingsY) < height/10):
-    text("Low Quality Mode, remcomenned for laptops",settingsX + height/5, settingsY + height/5)
-    if (dist(settingsX + height/5, settingsY + height/5,mouseX,mouseY) < height /10):
-        frameRate = (frameRate * .7)
-    text("Reset Game", settingsX + height/5, settingsY + height/4)
-    if (dist(settingsX + height/5, settingsY + height/4,mouseX,mouseY) < height /10):
-      exit()  
+    if (dist(mouseX,mouseY,settingsX,settingsY) < height/10):
+        text("Low Quality Mode, remcomenned for laptops",settingsX + height/5, settingsY + height/5)
+        if (dist(settingsX + height/5, settingsY + height/5,mouseX,mouseY) < height /10):
+            frameRate = (frameRate * .7)
+        text("Reset Game", settingsX + height/5, settingsY + height/4)
+        if (dist(settingsX + height/5, settingsY + height/4,mouseX,mouseY) < height /10):
+            exit()  
