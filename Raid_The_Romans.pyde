@@ -7,6 +7,7 @@ gameMode = 0
 archerX = []
 archerY = []
 hp = 100
+waveNum = 1
 
 def setup():
      fullScreen()
@@ -39,7 +40,9 @@ def draw():
     rect(displayWidth*0.865, displayHeight*0.2, displayWidth/10 ,displayHeight/30)
     fill(255) 
     rect(displayWidth*0.867, displayHeight*0.2+2, displayWidth/10.5*hp/100,displayHeight/35) 
-    
+    textSize(displayWidth/60)
+    fill(0)
+    text("Wave: "+str(waveNum), displayWidth/40,displayHeight/20)
      
      
 def mouseClicked():
