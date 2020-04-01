@@ -1,5 +1,10 @@
 import random        
 
+soldierAlive = [0]
+soldierX = [20]
+soldierY = [20]
+gameMode = 0
+
 def setup():
      fullScreen()
      background(255)
@@ -37,11 +42,7 @@ def mouseClicked():
 
 class archerTower(object):
   def __init__ (mouseX,mouseY):
-    def mouseClicked(): 
-      archerTowerX = mouseX
-      archerTowerY = mouseY
-      fill(255,255,2555)
-      circle(archerTowerX,archerTowerY,10)
+      
 #img(archerTower, archerTowerX,archerTowerY)
   
 tower1 = archerTower(0)
