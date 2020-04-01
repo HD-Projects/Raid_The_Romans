@@ -4,6 +4,8 @@ soldierAlive = [0]
 soldierX = [20]
 soldierY = [20]
 gameMode = 0
+archerX = []
+archerY = []
 
 def setup():
      fullScreen()
@@ -33,10 +35,10 @@ def draw():
 def mouseClicked():
      if gameMode == 0:
           for i in range(len(soldierAlive)):
-               if dist(mouseX, mouseY, soldierX[i-1], soldierY[i-1])<20:
-                    soldierAlive[i-1].delete()
-                    soldierX[i-1].delete()
-                    soldierY[i-1].delete(
+               if dist(mouseX, mouseY, (soldierX[i-1]*displayWidth), (soldierY[i-1]*displayWidth))<20:
+                    soldierAlive.pop(i-1)
+                    soldierX.pop(i-1)
+                    soldierY.pop(i-1)
 
 
 
