@@ -1,12 +1,12 @@
 import random        
 
 soldierHealth = [0]
-soldierX = [1]
-soldierY = [1]
+soldierX = [1,1]
+soldierY = [1, 5]
 gameMode = 0
 archerX = []
 archerY = []
-hp = 50
+hp = 100
 
 def setup():
      fullScreen()
@@ -38,7 +38,7 @@ def draw():
     fill(10)
     rect(displayWidth*0.865, displayHeight*0.2, displayWidth/10 ,displayHeight/30)
     fill(255) 
-    rect(displayWidth*0.867, displayHeight*0.2+2, displayWidth/10.5+(displayWidth/10/1000)*hp,displayHeight/35) 
+    rect(displayWidth*0.867, displayHeight*0.2+2, displayWidth/10.5*hp/100,displayHeight/35) 
     
      
      
