@@ -1,8 +1,8 @@
 import random        
 
-soldierHealth = [2,2,2]
-soldierX = [1,1,1,1]
-soldierY = [1, 5,7,20]
+soldierHealth = []
+soldierX = []
+soldierY = []
 archerX = []
 archerY = []
 hp = 100
@@ -10,6 +10,22 @@ waveNum = 1
 gameMode = 0
 frames = 0
 score = 0
+formNum = random.randint(0, 4)
+if formNum == 0:
+    soldierX = [1,1,1,1,1,1,-4,-4]
+    soldierY = [1, 3, 6,8, 11,13,6,8]
+elif formNum == 1:
+    soldierX = [1,1,1,1-5,-5,-5,-5]
+    soldierY = [3,5,7,9,2,4,6,8]
+elif formNum == 2:
+    soldierX = [1,1,-1,-1, -5,-5]
+    soldierY = [10, 12, 2, 4, 14,16,10,12]
+elif formNum == 3:
+    soldierX = [2, -2,-2,-2,-2,-2,-2, -7,-7]
+    soldierY = [10,2,4,6,8,10,12, 6,8]
+elif formNum == 4:
+    soldierX = [1,1,1,-5,-5,3,3]
+    soldierY = [2,4,6,5,7,10,12]
 
 def setup():
      fullScreen()
@@ -26,17 +42,38 @@ def setup():
      archerTowerY = 0
      
 def draw():
-    global soldierX, soldierY, soldierAlive, gameMode,hp,waveNum, frames, score
+    global soldierX, soldierY, soldierAlive, gameMode,hp,waveNum, frames, score, formNum
     if gameMode == 0:
+        frames += 1
         background(255)
-        for i in range(len(soldierY)):
-            img = loadImage("soldier.png")
-            image(img, soldierX[i-1]*displayWidth/100, soldierY[i-1]*displayWidth/20, displayWidth*0.035, displayHeight*0.1)
-            #print("X:"+str(soldierX[i-1]*displayWidth/100)+" Y:"+str(soldierY[i-1]*displayWidth/20))
-            if soldierX[i-1] < 76:
-                soldierX[i-1] = soldierX[i-1]+0.80
-            else:
-                hp+=-1
+        if frames/300 == waveNum:
+            formNum = random.randint(0, 4)
+            if formNum == 0:
+                soldierX = [1,1,1,1,1,1,-4,-4]
+                soldierY = [1, 3, 6,8, 11,13,6,8]
+            elif formNum == 1:
+                soldierX = [1,1,1,1-5,-5,-5,-5]
+                soldierY = [3,5,7,9,2,4,6,8]
+            elif formNum == 2:
+                soldierX = [1,1,-1,-1, -5,-5]
+                soldierY = [10, 12, 2, 4, 14,16,10,12]
+            elif formNum == 3:
+                soldierX = [2, -2,-2,-2,-2,-2,-2, -7,-7]
+                soldierY = [10,2,4,6,8,10,12, 6,8]
+            elif formNum == 4:
+                soldierX = [1,1,1,-5,-5,3,3]
+                soldierY = [2,4,6,5,7,10,12]
+        #if formNum == 0:
+            #print("Form 1")
+        if soldierX:
+            for i in range(len(soldierY)):
+                img = loadImage("soldier.png")
+                image(img, soldierX[i]*displayWidth/100, soldierY[i]*displayHeight/20, displayWidth*0.035, displayHeight*0.1)
+                #print("X:"+str(soldierX[i-1]*displayWidth/100)+" Y:"+str(soldierY[i-1]*displayWidth/20))
+                if soldierX[i] < 76:
+                    soldierX[i] = soldierX[i]+0.80
+                else:
+                    hp+=-0.5
         for i in range(len(archerY)):
             img = loadImage("archer.png")
             image(img,  archerX[i-1], archerY[i-1], displayWidth*0.035, displayHeight*0.1)
@@ -54,6 +91,12 @@ def draw():
         textSize(displayWidth/60)
         fill(0)
         text("Wave: "+str(waveNum), displayWidth/40,displayHeight/20)
+        textSize(displayWidth/60)
+        fill(0)
+        text("Score: "+str(score), displayWidth/40*35,displayHeight/20)
+        textSize(displayWidth/60)
+        fill(0)
+        text("Formation: "+str(formNum+1), displayWidth/3,displayHeight/20)
         score += waveNum
     elif gameMode == 1:
         frames += 1
@@ -69,7 +112,12 @@ def draw():
         textSize(64)
         fill(255)
         text("Error x00000, gameMode var out of range", displayWidth/10, displayHeight/2)
-     
+
+if (dist(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1]) < displayHeight / 10):
+  line(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1])     
+  print("Hit Soldier #"+str(i-1))
+  soldierX.pop(i-1)
+  soldierY.pop(i-1) 
      
 def mouseClicked():
     global gameMode
@@ -78,31 +126,12 @@ def mouseClicked():
         archerX.append(mouseX-25)
         archerY.append(mouseY-50)
     else:
-        for i in range(len(soldierHealth)):
-            print("HI, "+str(i)+str(dist(soldierX[i-1]*displayWidth/100, soldierY[i-1]*displayWidth/20,mouseX, mouseY)))
-            if dist(int(soldierX[i])*displayWidth/100, int(soldierY[i])*displayWidth/20,mouseX, mouseY<displayWidth/19.2)<displayWidth/5:
+        print("Clicked")
+        for i in range(len(soldierX)):
+            #print("HI, "+str(dist(soldierX[i-1]*displayWidth/100, soldierY[i-1]*displayWidth/20,mouseX, mouseY)))
+            print(i)
+            if dist((int(soldierX[i-1])*displayWidth/100), (int(soldierY[i-1])*displayHeight/20),mouseX, mouseY)<(displayWidth/19.2):
                 print("Hit Soldier #"+str(i))
-                soldierHealth[i] = int(soldierHealth[i])-1
-                if soldierHealth[i] > 1:
-                    soldierHealth.pop(i)
-                    soldierX.pop(i)
-                    soldierY.pop(i)
-      
-#img(archerTower, archerTowerX,archerTowerY)
-  
-def delayTimer():
-    m = millis
-    if millis == (m + 100):
-        reload = 1
-        
-    if ((dist(archerTowerX,archerTowerY,soilderX,soilderY) > displayHeight/ 10) and (reload == 1)):
-        line(archerTowerX,archerTowerY, soilderX,soilderY)
-         
-         
-    if (dist(mouseX,mouseY,settingsX,settingsY) < height/10):
-        text("Low Quality Mode, remcomenned for laptops",settingsX + height/5, settingsY + height/5)
-        if (dist(settingsX + height/5, settingsY + height/5,mouseX,mouseY) < height /10):
-            frameRate = (frameRate * .7)
-        text("Reset Game", settingsX + height/5, settingsY + height/4)
-        if (dist(settingsX + height/5, settingsY + height/4,mouseX,mouseY) < height /10):
-            exit()        
+                soldierX.pop(i-1)
+                soldierY.pop(i-1)
+             
