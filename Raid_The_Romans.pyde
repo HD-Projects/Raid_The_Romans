@@ -10,6 +10,7 @@ gameMode = 0
 frames = 0
 score = 0
 archerCooldown = 1
+framesStopped = 0
 
 formNum = random.randint(0, 4)
 if formNum == 0:
@@ -43,11 +44,11 @@ def setup():
      archerTowerY = 0
      
 def draw():
-    global soldierX, soldierY, soldierAlive, gameMode,hp,waveNum, frames, score, formNum
+    global soldierX, soldierY, soldierAlive, gameMode,hp,waveNum, frames, score, formNum,framesStopped
     if gameMode == 0:
         frames += 1
         background(255)
-        if frames/300 == waveNum:
+        if frames/150 == waveNum:
             formNum = random.randint(0, 4)
             if formNum == 0:
                 soldierX = [1,1,1,1,1,1,-4,-4]
@@ -110,16 +111,17 @@ def draw():
                     soldierX.pop(i-1)
                     soldierY.pop(i-1) 
     elif gameMode == 1:
-        frames += 1
-        if frames == 60:
+        framesStopped += 1
+        if framesStopped == 60:
             gameMode = 0
             hp = 100
+            framesStopped = 0
             frames = 0
             waveNum = 0
         background(0)
         textSize(displayWidth/15)
         fill(255)
-        text("  Game\n   Over\n\nScore: "+str(score), displayWidth/3, displayHeight/3)
+        text("  Game\n   Over\n\nScore: "+str(waveNum*frames), displayWidth/3, displayHeight/3)
     else:
         background(0)
         textSize(64)
@@ -127,12 +129,15 @@ def draw():
         text("Error x00001, gameMode var out of range", displayWidth/10, displayHeight/2)
      
 def mouseClicked():
-    global gameMode
+    global gameMode, frames
+    print("Clicked")
     if mouseX>displayWidth*0.8:
-        archerX.append(mouseX-25)
-        archerY.append(mouseY-50)
+        if frames >100:
+            archerX.append(mouseX-25)
+            archerY.append(mouseY-50)
+            frames += -100
     else:
-        print("Clicked")
+        #print("Clicked")
         for i in range(len(soldierX)-1):
             #print("HI, "+str(dist(soldierX[i-1]*displayWidth/100, soldierY[i-1]*displayWidth/20,mouseX, mouseY)))
             print(i)
