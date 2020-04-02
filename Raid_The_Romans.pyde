@@ -66,7 +66,7 @@ def draw():
         #if formNum == 0:
             #print("Form 1")
         if soldierX:
-            for i in range(len(soldierY)):
+            for i in range(len(soldierY)-1):
                 img = loadImage("soldier.png")
                 image(img, soldierX[i-1]*displayWidth/100, soldierY[i-1]*displayHeight/20, displayWidth*0.035, displayHeight*0.1)
                 #print("X:"+str(soldierX[i-1]*displayWidth/100)+" Y:"+str(soldierY[i-1]*displayWidth/20))
@@ -115,7 +115,7 @@ def draw():
         background(0)
         textSize(64)
         fill(255)
-        text("Error x00000, gameMode var out of range", displayWidth/10, displayHeight/2)
+        text("Error x00001, gameMode var out of range", displayWidth/10, displayHeight/2)
     if archerX and soldierX:
         for i in range(len(archerX)):
             if (dist(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1]) < displayWidth / 5):
@@ -132,7 +132,7 @@ def mouseClicked():
         archerY.append(mouseY-50)
     else:
         print("Clicked")
-        for i in range(len(soldierX)):
+        for i in range(len(soldierX)-1):
             #print("HI, "+str(dist(soldierX[i-1]*displayWidth/100, soldierY[i-1]*displayWidth/20,mouseX, mouseY)))
             print(i)
             if dist((int(soldierX[i-1])*displayWidth/100), (int(soldierY[i-1])*displayHeight/20),mouseX, mouseY)<(displayWidth/19.2):
