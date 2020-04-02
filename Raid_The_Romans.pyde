@@ -11,6 +11,8 @@ gameMode = 0
 frames = 0
 score = 0
 formNum = random.randint(0, 5)
+soldierX = [1,1,1,1,1,1]
+soldierY = [1, 3, 5,7, 10,12]
 
 
 def setup():
@@ -49,8 +51,8 @@ def draw():
             elif formNum == 4:
                 soldierX = []
                 soldierY = []
-        if formNum == 0:
-            print("Form 1")
+        #if formNum == 0:
+            #print("Form 1")
         if soldierX:
             for i in range(len(soldierY)):
                 img = loadImage("soldier.png")
@@ -77,6 +79,12 @@ def draw():
         textSize(displayWidth/60)
         fill(0)
         text("Wave: "+str(waveNum), displayWidth/40,displayHeight/20)
+        textSize(displayWidth/60)
+        fill(0)
+        text("Score: "+str(score), displayWidth/40*35,displayHeight/20)
+        textSize(displayWidth/60)
+        fill(0)
+        text("Formation: "+str(formNum+1), displayWidth/3,displayHeight/20)
         score += waveNum
     elif gameMode == 1:
         frames += 1
@@ -101,30 +109,12 @@ def mouseClicked():
         archerX.append(mouseX-25)
         archerY.append(mouseY-50)
     else:
-        for i in range(len(soldierHealth)):
+        print("Clicked")
+        for i in range(len(soldierX)):
             #print("HI, "+str(dist(soldierX[i-1]*displayWidth/100, soldierY[i-1]*displayWidth/20,mouseX, mouseY)))
             print(i)
-            if dist((int(soldierX[i])*displayWidth/100), (int(soldierY[i])*displayWidth/20),mouseX, mouseY)<(displayWidth/19.2):
+            if dist((int(soldierX[i-1])*displayWidth/100), (int(soldierY[i-1])*displayHeight/20),mouseX, mouseY)<(displayWidth/19.2):
                 print("Hit Soldier #"+str(i))
-                soldierHealth.pop(i)
-                soldierX.pop(i)
-                soldierY.pop(i)
-      
-#img(archerTower, archerTowerX,archerTowerY)
-  
-def delayTimer():
-    m = millis
-    if millis == (m + 100):
-        reload = 1
-        
-    if ((dist(archerTowerX,archerTowerY,soilderX,soilderY) > displayHeight/ 10) and (reload == 1)):
-        line(archerTowerX,archerTowerY, soilderX,soilderY)
-         
-         
-    if (dist(mouseX,mouseY,settingsX,settingsY) < height/10):
-        text("Low Quality Mode, remcomenned for laptops",settingsX + height/5, settingsY + height/5)
-        if (dist(settingsX + height/5, settingsY + height/5,mouseX,mouseY) < height /10):
-            frameRate = (frameRate * .7)
-        text("Reset Game", settingsX + height/5, settingsY + height/4)
-        if (dist(settingsX + height/5, settingsY + height/4,mouseX,mouseY) < height /10):
-            exit()        
+                soldierX.pop(i-1)
+                soldierY.pop(i-1)
+             
