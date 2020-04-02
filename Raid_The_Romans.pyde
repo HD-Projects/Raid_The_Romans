@@ -10,10 +10,22 @@ waveNum = 1
 gameMode = 0
 frames = 0
 score = 0
-formNum = random.randint(0, 5)
-soldierX = [1,1,1,1,1,1]
-soldierY = [1, 3, 5,7, 10,12]
-
+formNum = random.randint(0, 4)
+if formNum == 0:
+    soldierX = [1,1,1,1,1,1,-4,-4]
+    soldierY = [1, 3, 6,8, 11,13,6,8]
+elif formNum == 1:
+    soldierX = [1,1,1,1-5,-5,-5,-5]
+    soldierY = [3,5,7,9,2,4,6,8]
+elif formNum == 2:
+    soldierX = [1,1,-1,-1, -5,-5]
+    soldierY = [10, 12, 2, 4, 14,16,10,12]
+elif formNum == 3:
+    soldierX = [2, -2,-2,-2,-2,-2,-2, -7,-7]
+    soldierY = [10,2,4,6,8,10,12, 6,8]
+elif formNum == 4:
+    soldierX = [1,1,1,-5,-5,3,3]
+    soldierY = [2,4,6,5,7,10,12]
 
 def setup():
      fullScreen()
@@ -35,22 +47,22 @@ def draw():
         frames += 1
         background(255)
         if frames/300 == waveNum:
-            formNum = 0#random.randint(0, 4)
+            formNum = random.randint(0, 4)
             if formNum == 0:
-                soldierX = [1,1,1,1,1,1]
-                soldierY = [1, 3, 5,7, 10,12]
+                soldierX = [1,1,1,1,1,1,-4,-4]
+                soldierY = [1, 3, 6,8, 11,13,6,8]
             elif formNum == 1:
-                soldierX = []
-                soldierY = []
+                soldierX = [1,1,1,1-5,-5,-5,-5]
+                soldierY = [3,5,7,9,2,4,6,8]
             elif formNum == 2:
-                soldierX = []
-                soldierY = []
+                soldierX = [1,1,-1,-1, -5,-5]
+                soldierY = [10, 12, 2, 4, 14,16,10,12]
             elif formNum == 3:
-                soldierX = []
-                soldierY = []
+                soldierX = [2, -2,-2,-2,-2,-2,-2, -7,-7]
+                soldierY = [10,2,4,6,8,10,12, 6,8]
             elif formNum == 4:
-                soldierX = []
-                soldierY = []
+                soldierX = [1,1,1,-5,-5,3,3]
+                soldierY = [2,4,6,5,7,10,12]
         #if formNum == 0:
             #print("Form 1")
         if soldierX:
