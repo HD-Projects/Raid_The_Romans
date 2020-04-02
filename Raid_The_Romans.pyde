@@ -101,8 +101,8 @@ def draw():
         fill(255)
         text("Error x00000, gameMode var out of range", displayWidth/10, displayHeight/2)
 
-if (dist(soilderX[i-1],soilderY[i-1],archerX[i-1],archerY[i-1]) < displayHeight / 10):
-  line(soilderX[i-1],soilderY[i-1],archerX[i-1],archerY[i-1])     
+if (dist(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1]) < displayHeight / 10):
+  line(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1])     
   print("Hit Soldier #"+str(i-1))
   soldierX.pop(i-1)
   soldierY.pop(i-1) 
