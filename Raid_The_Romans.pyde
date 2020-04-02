@@ -68,10 +68,10 @@ def draw():
         if soldierX:
             for i in range(len(soldierY)):
                 img = loadImage("soldier.png")
-                image(img, soldierX[i]*displayWidth/100, soldierY[i]*displayHeight/20, displayWidth*0.035, displayHeight*0.1)
+                image(img, soldierX[i-1]*displayWidth/100, soldierY[i-1]*displayHeight/20, displayWidth*0.035, displayHeight*0.1)
                 #print("X:"+str(soldierX[i-1]*displayWidth/100)+" Y:"+str(soldierY[i-1]*displayWidth/20))
-                if soldierX[i] < 76:
-                    soldierX[i] = soldierX[i]+0.80
+                if soldierX[i-1] < 76:
+                    soldierX[i-1] = soldierX[i-1]+0.80
                 else:
                     hp+=-0.5
         for i in range(len(archerY)):
@@ -83,8 +83,12 @@ def draw():
             frames = 0
         img = loadImage("castle.png")
         image(img, displayWidth*0.85, displayHeight*0.25, displayHeight*0.25, displayHeight*0.25)
+        strokeWeight(displayWidth/70)
+        fill(113, 79, 26)
         line(displayWidth*0.82, 0, displayWidth*0.82, displayHeight)
+        fill(113, 79, 26)
         fill(10)
+        strokeWeight(1)
         rect(displayWidth*0.865, displayHeight*0.2, displayWidth/10 ,displayHeight/30)
         fill(255) 
         rect(displayWidth*0.867, displayHeight*0.2+2, displayWidth/10.5*hp/100,displayHeight/35) 
@@ -112,12 +116,13 @@ def draw():
         textSize(64)
         fill(255)
         text("Error x00000, gameMode var out of range", displayWidth/10, displayHeight/2)
-
-if (dist(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1]) < displayHeight / 10):
-  line(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1])     
-  print("Hit Soldier #"+str(i-1))
-  soldierX.pop(i-1)
-  soldierY.pop(i-1) 
+    if archerX and soldierX:
+        for i in range(len(archerX)):
+            if (dist(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1]) < displayWidth / 5):
+                line(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1])     
+                print("Hit Soldier #"+str(i-1))
+                soldierX.pop(i-1)
+                soldierY.pop(i-1) 
      
 def mouseClicked():
     global gameMode
