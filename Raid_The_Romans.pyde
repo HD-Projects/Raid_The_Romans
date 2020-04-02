@@ -1,6 +1,5 @@
 import random        
 
-soldierHealth = []
 soldierX = []
 soldierY = []
 archerX = []
@@ -10,6 +9,8 @@ waveNum = 1
 gameMode = 0
 frames = 0
 score = 0
+archerCooldown = 1
+
 formNum = random.randint(0, 4)
 if formNum == 0:
     soldierX = [1,1,1,1,1,1,-4,-4]
@@ -37,7 +38,7 @@ def setup():
      global archerTowerX 
      global archerTowerY 
      global reload
-     reload == 1
+     reload = 1
      archerTowerX = 0 
      archerTowerY = 0
      
@@ -63,8 +64,7 @@ def draw():
             elif formNum == 4:
                 soldierX = [1,1,1,-5,-5,3,3]
                 soldierY = [2,4,6,5,7,10,12]
-        #if formNum == 0:
-            #print("Form 1")
+            waveNum +=1
         if soldierX:
             for i in range(len(soldierY)-1):
                 img = loadImage("soldier.png")
@@ -81,6 +81,7 @@ def draw():
             print("Game Over")
             gameMode = 1
             frames = 0
+        
         img = loadImage("castle.png")
         image(img, displayWidth*0.85, displayHeight*0.25, displayHeight*0.25, displayHeight*0.25)
         strokeWeight(displayWidth/70)
@@ -97,16 +98,24 @@ def draw():
         text("Wave: "+str(waveNum), displayWidth/40,displayHeight/20)
         textSize(displayWidth/60)
         fill(0)
-        text("Score: "+str(score), displayWidth/40*35,displayHeight/20)
+        text("Score: "+str(frames*waveNum), displayWidth/40*35,displayHeight/20)
         textSize(displayWidth/60)
         fill(0)
         text("Formation: "+str(formNum+1), displayWidth/3,displayHeight/20)
-        score += waveNum
+        if archerX and soldierX:
+            for i in range(len(archerX)):
+                if (dist(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1]) < displayWidth / 5):
+                    line(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1])     
+                    print("Hit Soldier #"+str(i-1))
+                    soldierX.pop(i-1)
+                    soldierY.pop(i-1) 
     elif gameMode == 1:
         frames += 1
         if frames == 60:
             gameMode = 0
             hp = 100
+            frames = 0
+            waveNum = 0
         background(0)
         textSize(displayWidth/15)
         fill(255)
@@ -116,17 +125,9 @@ def draw():
         textSize(64)
         fill(255)
         text("Error x00001, gameMode var out of range", displayWidth/10, displayHeight/2)
-    if archerX and soldierX:
-        for i in range(len(archerX)):
-            if (dist(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1]) < displayWidth / 5):
-                line(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1])     
-                print("Hit Soldier #"+str(i-1))
-                soldierX.pop(i-1)
-                soldierY.pop(i-1) 
      
 def mouseClicked():
     global gameMode
-    #if gameMode == 0:
     if mouseX>displayWidth*0.8:
         archerX.append(mouseX-25)
         archerY.append(mouseY-50)
