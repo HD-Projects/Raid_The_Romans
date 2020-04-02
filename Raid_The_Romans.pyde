@@ -1,6 +1,6 @@
 import random        
 
-soldierHealth = [2,2]
+soldierHealth = [2,2,2]
 soldierX = [1,1,1,1]
 soldierY = [1, 5,7,20]
 archerX = []
@@ -8,6 +8,7 @@ archerY = []
 hp = 100
 waveNum = 1
 gameMode = 0
+frames = 0
 
 def setup():
      fullScreen()
@@ -24,13 +25,13 @@ def setup():
      archerTowerY = 0
      
 def draw():
-    global soldierX, soldierY, soldierAlive, gameMode,hp,waveNum
+    global soldierX, soldierY, soldierAlive, gameMode,hp,waveNum, frames
     if gameMode == 0:
         background(255)
         for i in range(len(soldierY)):
             img = loadImage("soldier.png")
             image(img, soldierX[i-1]*displayWidth/100, soldierY[i-1]*displayWidth/20, displayWidth*0.035, displayHeight*0.1)
-            print("X:"+str(soldierX[i-1]*displayWidth/100)+" Y:"+str(soldierY[i-1]*displayWidth/20))
+            #print("X:"+str(soldierX[i-1]*displayWidth/100)+" Y:"+str(soldierY[i-1]*displayWidth/20))
             if soldierX[i-1] < 76:
                 soldierX[i-1] = soldierX[i-1]+0.5
             else:
@@ -38,11 +39,12 @@ def draw():
         for i in range(len(archerY)):
             img = loadImage("archer.png")
             image(img,  archerX[i-1], archerY[i-1], displayWidth*0.035, displayHeight*0.1)
-        if hp == 0:
+        if hp <= 0:
             print("Game Over")
             gameMode = 1
+            frames = 0
         img = loadImage("castle.png")
-        image(img, displayWidth*0.85, displayHeight*0.3, displayHeight*0.25, displayHeight*0.25)
+        image(img, displayWidth*0.85, displayHeight*0.25, displayHeight*0.25, displayHeight*0.25)
         line(displayWidth*0.82, 0, displayWidth*0.82, displayHeight)
         fill(10)
         rect(displayWidth*0.865, displayHeight*0.2, displayWidth/10 ,displayHeight/30)
@@ -52,6 +54,10 @@ def draw():
         fill(0)
         text("Wave: "+str(waveNum), displayWidth/40,displayHeight/20)
     elif gameMode == 1:
+        frames += 1
+        if frames == 60:
+            gameMode = 0
+            hp = 100
         background(0)
         textSize(displayWidth/15)
         fill(255)
@@ -71,14 +77,14 @@ def mouseClicked():
         archerY.append(mouseY-50)
     else:
         for i in range(len(soldierHealth)):
-            print("HI, "+str(dist(soldierX[i-1]*displayWidth/100, soldierY[i-1]*displayWidth/20,mouseX, mouseY)))
+            print("HI, "+str(i)+str(dist(soldierX[i-1]*displayWidth/100, soldierY[i-1]*displayWidth/20,mouseX, mouseY)))
             if dist(int(soldierX[i])*displayWidth/100, int(soldierY[i])*displayWidth/20,mouseX, mouseY<displayWidth/19.2)<displayWidth/5:
                 print("Hit Soldier #"+str(i))
                 soldierHealth[i] = int(soldierHealth[i])-1
-                #if soldierHealth[i-1] > 1:
-                soldierHealth.pop(i)
-                soldierX.pop(i)
-                soldierY.pop(i)
+                if soldierHealth[i] > 1:
+                    soldierHealth.pop(i)
+                    soldierX.pop(i)
+                    soldierY.pop(i)
       
 #img(archerTower, archerTowerX,archerTowerY)
   

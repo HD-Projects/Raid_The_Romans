@@ -12,7 +12,3 @@ Click on soilders to kill them, use your mouse to place archer towers by moving 
 
 This is an infinite game where you try to stay alive as long as you can, so in other words there is no winning. 
 This is historically true for many of Rome's enimies as rome was such a large and powerful country.
-
-Feliciter! 
-
- rect(displayWidth*0.865 - (HP / 1000)    , displayHeight*0.2, displayWidth/10 ,displayHeight/30)
