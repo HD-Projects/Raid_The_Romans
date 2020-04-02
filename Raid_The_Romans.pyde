@@ -112,7 +112,12 @@ def draw():
         textSize(64)
         fill(255)
         text("Error x00000, gameMode var out of range", displayWidth/10, displayHeight/2)
-     
+
+if (dist(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1]) < displayHeight / 10):
+  line(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1])     
+  print("Hit Soldier #"+str(i-1))
+  soldierX.pop(i-1)
+  soldierY.pop(i-1) 
      
 def mouseClicked():
     global gameMode
