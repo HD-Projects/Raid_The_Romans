@@ -28,7 +28,11 @@ def setup():
 def draw():
     global soldierX, soldierY, soldierAlive, gameMode,hp,waveNum, frames, score
     if gameMode == 0:
+        frame += 1
         background(255)
+        if waveNum == 1 and frames == 480:
+            waveNum += 1
+            frames = 0
         for i in range(len(soldierY)):
             img = loadImage("soldier.png")
             image(img, soldierX[i-1]*displayWidth/100, soldierY[i-1]*displayWidth/20, displayWidth*0.035, displayHeight*0.1)
@@ -36,7 +40,7 @@ def draw():
             if soldierX[i-1] < 76:
                 soldierX[i-1] = soldierX[i-1]+0.80
             else:
-                hp+=-1
+                hp+=-0.5
         for i in range(len(archerY)):
             img = loadImage("archer.png")
             image(img,  archerX[i-1], archerY[i-1], displayWidth*0.035, displayHeight*0.1)

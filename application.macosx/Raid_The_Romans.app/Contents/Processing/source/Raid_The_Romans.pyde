@@ -9,6 +9,7 @@ hp = 100
 waveNum = 1
 gameMode = 0
 frames = 0
+score = 0
 
 def setup():
      fullScreen()
@@ -25,7 +26,7 @@ def setup():
      archerTowerY = 0
      
 def draw():
-    global soldierX, soldierY, soldierAlive, gameMode,hp,waveNum, frames
+    global soldierX, soldierY, soldierAlive, gameMode,hp,waveNum, frames, score
     if gameMode == 0:
         background(255)
         for i in range(len(soldierY)):
@@ -33,7 +34,7 @@ def draw():
             image(img, soldierX[i-1]*displayWidth/100, soldierY[i-1]*displayWidth/20, displayWidth*0.035, displayHeight*0.1)
             #print("X:"+str(soldierX[i-1]*displayWidth/100)+" Y:"+str(soldierY[i-1]*displayWidth/20))
             if soldierX[i-1] < 76:
-                soldierX[i-1] = soldierX[i-1]+0.5
+                soldierX[i-1] = soldierX[i-1]+0.80
             else:
                 hp+=-1
         for i in range(len(archerY)):
@@ -53,6 +54,7 @@ def draw():
         textSize(displayWidth/60)
         fill(0)
         text("Wave: "+str(waveNum), displayWidth/40,displayHeight/20)
+        score += waveNum
     elif gameMode == 1:
         frames += 1
         if frames == 60:
@@ -61,7 +63,7 @@ def draw():
         background(0)
         textSize(displayWidth/15)
         fill(255)
-        text("  Game\n   Over\n\nScore: ", displayWidth/3, displayHeight/3)
+        text("  Game\n   Over\n\nScore: "+str(score), displayWidth/3, displayHeight/3)
     else:
         background(0)
         textSize(64)
