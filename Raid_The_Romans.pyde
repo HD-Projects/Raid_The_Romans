@@ -74,7 +74,7 @@ def draw():
                 if soldierX[i-1] < 76:
                     soldierX[i-1] = soldierX[i-1]+0.80
                 else:
-                    hp+=-0.5
+                    hp+=-0.5-(len(archerX)*0.05)
         for i in range(len(archerY)):
             img = loadImage("archer.png")
             image(img,  archerX[i-1], archerY[i-1], displayWidth*0.035, displayHeight*0.1)
@@ -103,7 +103,7 @@ def draw():
         textSize(displayWidth/60)
         fill(0)
         text("Formation: "+str(formNum+1), displayWidth/3,displayHeight/20)
-        if archerX and soldierX:
+        if archerX and soldierX and soldierY:
             for i in range(len(archerX)):
                 if (dist(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1]) < displayWidth / 5):
                     line(soldierX[i-1],soldierY[i-1],archerX[i-1],archerY[i-1])     
@@ -129,13 +129,15 @@ def draw():
         text("Error x00001, gameMode var out of range", displayWidth/10, displayHeight/2)
      
 def mouseClicked():
-    global gameMode, frames
+    global gameMode, frames, hp
     print("Clicked")
     if mouseX>displayWidth*0.8:
         if frames >100:
             archerX.append(mouseX-25)
             archerY.append(mouseY-50)
             frames += -100
+            if hp <95:
+                hp += 10
     else:
         #print("Clicked")
         for i in range(len(soldierX)-1):
