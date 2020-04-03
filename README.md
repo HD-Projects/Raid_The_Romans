@@ -1,13 +1,12 @@
 # Raid-The-Romans
 
 This a project for our social studies unit on Ancient rome. It is a videogame where you play the leader of a country 
-neighboring Rome trying to survive a Roman invasion. The object of the game is to kill Roman Soldiers by placing archer
-towers and clicking them with your mouse
+neighboring Rome trying to survive a Roman invasion. The object of the game is to kill Roman Soldiers by clicking them with your mouse. Placing an archer unit increases your health by 10 but can't increase your health over 105, archer units cost variable amounts depending on the wave you are on. The base cost of an archer unit is 100 pts.
 
-# Controls
+# Control
 
-Click on soldiers to kill them, use your mouse to place archer towers by moving them and then clicking any mouse button. Click the settings icon to display settings.
-
+Click on soldiers to kill them, use your mouse to place archer tower by clicking anywhere behind your wall. 
+ 
 # How To Win
 
 This is an infinite game where you try to stay alive as long as you can, so in other words there is no winning. 
